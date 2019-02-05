@@ -1,0 +1,26 @@
+body {
+    display: grid;
+    margin: 5px;
+    resize: both;
+    min-height: 95vh;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 200px 1fr;
+    box-shadow: 1px 1px 2px;
+    grid-template-areas:
+        "area_title       area_title"
+        "area_menu        area_contents  "
+}
+
+area_title {
+    grid-area: area_title;
+    border:1px solid rgb(126, 125, 125); 
+}
+
+area_menu {
+    grid-area: area_menu;
+    border:1px solid rgb(126, 125, 125); 
+}
+area_contents {
+    grid-area: area_contents;
+    border:1px solid rgb(126, 125, 125); 
+}

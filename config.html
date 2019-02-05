@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>config</title>
+  <link href="config.css" rel="stylesheet" type="text/css" media="all">
+  <!--[if IE]>
+    <script type="text/javascript" src="excanvas.js"></script>
+    <![endif]-->
+  <!--　 fabric.jsの読込み　-->
+  <script type="text/javascript" src="./libs/fabric.js"></script>
+  <script src="config.js"></script>
+</head>
+
+<body>
+  <area_cntrl>
+    <input type="button" id="init_button_id" class="button" value="init"><br>
+    <input type="text" id="camera_name_text_id" name="example1" size="30" maxlength="30" value="input camera name"><br>
+    <input type="text" id="region_name_text_id" name="example2" size="30" maxlength="30" value="input region name">
+    <input type="button" id="set_polygon_button_id" class="button" value="set region"><br>
+    <input type="button" id="clear_button_id" class="button" value="clear">
+    <input type="button" id="clear_all_button_id" class="button" value="clear all">
+    <input type="button" id="drawmode_button_id" class="button" value="select off" disabled>
+
+    <input type="text" id="file_name_text_id" name="example2" size="30" maxlength="30" value="output_data">
+    <input type="button" id="json_button_id" class="button" value="save"><br>
+    <form name="myform">
+      <input name="myfile" , type="file">
+    </form>
+  </area_cntrl>
+  <area_map>
+    <div id="div_map_img_id">
+      <canvas id="cvn_bg_map_id" width="600" height="480"></canvas>
+      <canvas id="cvn_top_map_id" width="600" height="480"></canvas>
+    </div>
+  </area_map>
+  <area_edit>
+    <table id="sample">
+      <thead>
+        <tr>
+          <th>施設名</th>
+          <th>カメラ名</th>
+          <th>ファイル名</th>
+          <th>クロップ</th>
+          <th>edit</th>
+        </tr>
+      </thead>
+      <tbody id="tbody_id">
+      </tbody>
+      <!--
+    <tfoot>
+      <tr>
+        <th>フッタ１</th>
+        <th>フッタ２</th>
+        <th>フッタ３</th>
+        <th>フッタ４</th>
+        <th>フッタ５</th>
+      </tr>
+    </tfoot>
+    -->
+    </table>
+  </area_edit>
+  <area_setting>
+    <form name="form1">
+      <a>解析タイプ:</a>
+      <select name="analysis_select_name">
+        <option value="flow">flow</option>
+        <option value="entrance">entrance</option>
+      </select>
+      <a>from:</a>
+      <select name="from_area_select_name">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <a>to:</a>
+      <select name="to_area_select_name">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <input type="button" id="analysis_create_button_id" class="button" value="create">
+      <input type="button" id="analysis_set_button_id" class="button" value="set">
+    </form>
+    <table id="sample">
+      <thead>
+        <tr>
+          <th>解析タイプ</th>
+          <th>--From--</th>
+          <th>---To---</th>
+        </tr>
+      </thead>
+      <tbody id="tbody_setting_id">
+      </tbody>
+
+      <!--
+            <tfoot>
+              <tr>
+                <th>フッタ１</th>
+                <th>フッタ２</th>
+                <th>フッタ３</th>
+                <th>フッタ４</th>
+                <th>フッタ５</th>
+              </tr>
+            </tfoot>
+            -->
+    </table>
+  </area_setting>
+  <!--
+    <area_debug>
+        <div type="text" id="txt_log_id" disabled="disabled"></div>
+    </area_debug>
+-->
+</body>
+
+</html>

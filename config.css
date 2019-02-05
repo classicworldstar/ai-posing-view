@@ -1,0 +1,99 @@
+body {
+    display: grid;
+    margin: 0;
+    resize: both;
+    min-height: 100vh;
+    grid-template-rows: 1fr 80px 540px 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "area_edit     "
+        "area_cntrl     "
+        "area_map       "
+        "area_setting"
+}
+
+area_cntrl {
+    grid-area: area_cntrl;
+}
+
+area_map {
+    grid-area: area_map;
+}
+area_edit {
+    grid-area: area_edit;
+    scroll-behavior: auto,
+}
+area_setting {
+    grid-area: area_setting;
+}
+
+
+#sample tr,
+#sample th,
+#sample td {
+    background-color: rgb(240, 240, 240);
+    font-size: inherit !important;
+    color: inherit !important;
+}
+#sample thead,
+#sample tfoot {
+    background-color: rgb(221, 221, 221);
+}
+#sample {
+    border:1px solid black; 
+}
+#sample thead {
+    border-bottom: double;
+}
+#sample tfoot {
+    border-top: double;
+}
+
+div#div_map_img_id{
+    position: relative;
+    width:1fr;  
+    height:1fr; 
+    margin-top: 50px
+}
+div#div_map_img_id>*{
+    position: absolute;
+}
+canvas#cvn_bg_map_id{
+    border:1px solid rgb(145, 145, 145); 
+}
+canvas#cvn_top_map_id{
+    border:1px solid rgb(161, 161, 161); 
+}
+
+#init_button_id {
+    box-shadow: 1px 1px 2px;
+}
+#drawmode_button_id {
+    box-shadow: 1px 1px 2px;
+}
+#set_polygon_button_id {
+    box-shadow: 1px 1px 2px;
+}
+
+#json_button_id {
+    box-shadow: 1px 1px 2px;    
+}
+#clear_button_id {
+    box-shadow: 1px 1px 2px;    
+}
+#clear_all_button_id {
+    box-shadow: 1px 1px 2px;    
+}
+#restore_button_id {
+    box-shadow: 1px 1px 2px;     
+}
+#open_button_id {
+    box-shadow: 1px 1px 2px;
+}
+div#txt_log_id{
+    font-size: 10px; 
+    width:1fr;  
+    height:1fr; 
+    border:1px solid black; 
+    overflow:auto 
+}

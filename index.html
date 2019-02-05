@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>index</title>
+  <link href="index.css" rel="stylesheet" type="text/css" media="all">
+  <!--[if IE]>
+    <script type="text/javascript" src="excanvas.js"></script>
+    <![endif]-->
+  <!--　 fabric.jsの読込み　-->
+  <script src="index.js"></script>
+</head>
+<!--
+<FRAMESET ROWS="60,*">
+  <FRAME SRC="title.html" NAME="head">
+    <FRAMESET COLS="200,*">
+      <FRAME SRC="menu.html" NAME="menu">
+        <FRAME SRC="main.html" NAME="main">
+    </FRAMESET>
+    <NOFRAMES>
+
+      <BODY>
+      </BODY>
+    </NOFRAMES>
+</FRAMESET>
+  -->
+
+<body>
+
+  <area_title>
+    <a href="./config.html" target="_blank">config</a>
+    <a href="./support.html" target="_blank">support</a>
+  </area_title>
+  <area_menu>
+    <div id="div_area_menu_id">
+      <h3>area menu</h3>
+      <!--
+      <input type="button" id="button_flow_analysis_id" class="button" value="flow analysis" style="width:150px;height:50px"><br>
+      <input type="button" id="button_entrance_analysis_id" class="button" value="entrance analysis" style="width:150px;height:50px"><br>
+      -->
+      <a href="./flowAnalysis.html" target="ifr">flow</a><br>
+      <a href="./entranceAnalysis.html" target="ifr">entrance</a>
+    </div>
+  </area_menu>
+  <area_contents>
+    <div id="div_area_contents_id">
+      <iframe name="ifr" src="./main.html" height="480" width="600"></iframe>
+    </div>
+  </area_contents>
+
+</body>
+
+
+</html>
