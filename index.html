@@ -29,23 +29,25 @@
 <body>
 
   <area_title>
-    <a href="./config.html" target="_blank">config</a>
-    <a href="./support.html" target="_blank">support</a>
+    <div id="title" class="title">
+      <a href="./config.html" target="_blank">config</a>
+      <a href="./support.html" target="_blank">support</a>
+    </div>
   </area_title>
   <area_menu>
-    <div id="div_area_menu_id">
+    <div id="div_area_menu_id" class="div_area_menu_id">
       <h3>area menu</h3>
       <!--
       <input type="button" id="button_flow_analysis_id" class="button" value="flow analysis" style="width:150px;height:50px"><br>
       <input type="button" id="button_entrance_analysis_id" class="button" value="entrance analysis" style="width:150px;height:50px"><br>
       -->
-      <a href="./flowAnalysis.html" target="ifr">flow</a><br>
-      <a href="./entranceAnalysis.html" target="ifr">entrance</a>
+      <a href="./flowAnalysis.html" target="ifrm">flow</a><br>
+      <a href="./entranceAnalysis.html" target="ifrm">entrance</a>
     </div>
   </area_menu>
-  <area_contents>
-    <div id="div_area_contents_id">
-      <iframe name="ifr" src="./main.html" height="480" width="600"></iframe>
+  <area_contents id="area_contents_id">
+    <div id="div_area_contents_id" class="div_area_contents_id">
+      <iframe name="ifrm" src="./main.html" class="iframe_main" id=ifrm></iframe>
     </div>
   </area_contents>
 

@@ -1,56 +1,126 @@
+var areaObjectPos = { row: 0, column: 0 };
+
 var areaObject = {
-  name: "ららぽーと",
-  cameraName: "カメラ名1",
-  fileName: "ファイル名1", //ファイルの名称
-  src: "path1", //サーバー上ファイルのurl
+  name: "",
+  cameraName: "",
+  fileName: "", //ファイルの名称
+  src: "", //サーバー上ファイルのurl
   clop: 0, //0,1,2,3を指定
   region: [], //設定したregionを格納
   AnalysisObject: [], //解析タイプ、From,To
 };
 
-var data = {
+var dataObject = {
   name: "", //data名称を任意に決める。
   index_num: 5,　//areaのindex数
   areaObject: [
     {
       name: "ららぽーと",
-      cameraName: "カメラ名1",
-      fileName: "ファイル名1", //ファイルの名称
-      src: "path1", //サーバー上ファイルのurl
+      cameraName: "camera01",
+      fileName: "camera01_01.jpg", //ファイルの名称
+      src: "./images/camera01_01.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
       region: [],
+      AnalysisObject: [], //解析タイプ、From,To
     },
     {
       name: "ららぽーと",
-      cameraName: "カメラ名1",
-      fileName: "ファイル名2", //ファイルの名称
-      src: "path2", //サーバー上ファイルのurl
+      cameraName: "camera01",
+      fileName: "camera01_02.jpg", //ファイルの名称
+      src: "./images/camera01_02.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
       region: [],
+      AnalysisObject: [], //解析タイプ、From,To
     },
     {
       name: "ららぽーと",
-      cameraName: "カメラ名1",
-      fileName: "ファイル名3", //ファイルの名称
-      src: "path3", //サーバー上ファイルのurl
+      cameraName: "camera01",
+      fileName: "camera01_03.jpg", //ファイルの名称
+      src: "./images/camera01_03.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
       region: [],
+      AnalysisObject: [], //解析タイプ、From,To
     },
     {
       name: "ららぽーと",
-      cameraName: "カメラ名2",
-      fileName: "ファイル名4", //ファイルの名称
-      src: "pat4", //サーバー上ファイルのurl
+      cameraName: "camera02",
+      fileName: "camera02_01.jpg", //ファイルの名称
+      src: "./images/camera02_01.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
       region: [],
+      AnalysisObject: [], //解析タイプ、From,To
     },
     {
       name: "ららぽーと",
-      cameraName: "カメラ名2",
-      fileName: "ファイル名5", //ファイルの名称
-      src: "path5", //サーバー上ファイルのurl
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
       region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
+    },
+    {
+      name: "ららぽーと",
+      cameraName: "camera02",
+      fileName: "camera02_02.jpg", //ファイルの名称
+      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
+      clop: 0, //0,1,2,3を指定
+      region: [],
+      AnalysisObject: [], //解析タイプ、From,To
     },
   ]
 };
@@ -133,12 +203,7 @@ window.onload = function () {
      }
  */
 
-  document.getElementById("analysis_create_button_id").onclick = function (e) {
-    createTypeFromTo();
-  };
-  document.getElementById("analysis_set_button_id").onclick = function (e) {
-    setTypeFromTo();
-  };
+
 
   document.getElementById("clear_button_id").onclick = function (e) {
 
@@ -201,7 +266,12 @@ window.onload = function () {
       lMapPoints.name = document.getElementById("region_name_text_id").value;
       lMapPoints.index = lMapRegionNo;
       drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'blue');
+
+      //解析タイプのselectboxに追加
+      setAnalysisSelectBox(lMapRegionNo, "from_area_select_id");
+      setAnalysisSelectBox(lMapRegionNo, "to_area_select_id");
       lMapRegionNo++;
+
       clearPoints(lMapPoints, lMapRegionNo);
     } else {
       alert("the number of points > 1");
@@ -294,43 +364,16 @@ window.onload = function () {
     console.log("img_map_img_id,mouseup");
   });
 
-  //背景Img表示
-  canvas_map_bg = document.querySelector('#cvn_bg_map_id');
-  var mapCtx = canvas_map_bg.getContext('2d');
-  var renderMap = function (image) {
-    mapCtx.drawImage(image, 0, 0);
-    setImgSize(canvas_map_bg, image);
-  }
-
-  var cancelEvent = function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
+  document.getElementById("analysis_create_button_id").onclick = function (e) {
+    createTypeFromTo();
   };
-
-  //Drop
-  document.addEventListener("dragover", cancelEvent, false);
-  document.addEventListener("dragenter", cancelEvent, false);
-  document.getElementById("cvn_top_map_id").addEventListener("drop", function (event) {
-    event.preventDefault();
-
-    var file = event.dataTransfer.files[0];
-    lMapFileName = file.name;
-    var image = new Image();
-    image.onload = function () {
-      renderMap(this);
-    };
-    var reader = new FileReader();
-    reader.onload = function (event) {
-      image.src = event.target.result;
-      canvas_map_top = new fabric.Canvas('cvn_top_map_id', {
-        isDrawingMode: true,
-        backgroundColor: 'rgba(250,250,250,0)',
-      });
-    };
-    reader.readAsDataURL(file);
-  }, false);
-
+  document.getElementById("set_button_id").onclick = function (e) {
+    setTypeFromTo();
+  };
+  document.getElementById("tbody_id").onclick = function (e) {
+    // set polygon data for n region.
+    getCELL();
+  }
 }
 
 
@@ -344,6 +387,10 @@ function createTypeFromTo() {
   const type3 = document.form1.to_area_select_name;
   const toArea = type3.options[type3.selectedIndex].value;
   var elemet = document.getElementById("tbody_setting_id");
+
+  var analysisType = { Analysis, fromArea, toArea };
+  areaObject.AnalysisObject.push(analysisType);
+
   elemet.insertAdjacentHTML(
     'beforeend',
     '<tr><td><a>' + Analysis + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td></tr>'
@@ -352,24 +399,30 @@ function createTypeFromTo() {
 
 function setTypeFromTo() {
   //serverへ送信するデータを作成し、json形式でsendする
+  if (areaObjectPos.row > 0) {
+    dataObject.areaObject[areaObjectPos.row - 1] = areaObject;
+  }
+  //server送信
+  //http://localhost:5000
+
 
 }
 
 function dataLoad() {
   //serverからデータを受信して、表示を行う。
   var test2 = document.getElementById("tbody_id");
-  for (var i = 0; i < data.areaObject.length; i++) {
-    var area_name = data.areaObject[i].name;
-    var camera_name = data.areaObject[i].cameraName;
-    var file_name = data.areaObject[i].fileName;
-    var clop = data.areaObject[i].clop;
+  for (var i = 0; i < dataObject.areaObject.length; i++) {
+    var area_name = dataObject.areaObject[i].name;
+    var camera_name = dataObject.areaObject[i].cameraName;
+    var file_name = dataObject.areaObject[i].fileName;
+    var clop = dataObject.areaObject[i].clop;
     test2.insertAdjacentHTML(
       'beforeend',
       '<tr><td><a>' + area_name + '</a></td> <td><a>' + camera_name + '</a></td><td><a>' + file_name + '</a></td><td><a>' + clop + '</a></td><td><input type="button" id="select_button_id" class="button" value="select"></td></tr>'
     );
   }
 
-  var $sampleTable = document.getElementById("sample");
+  var $sampleTable = document.getElementById("sample1");
   var $sampleTBodies = $sampleTable.tBodies;
 
   for (var $tbodyIndex = 0; $tbodyIndex < $sampleTBodies.length; $tbodyIndex++) {
@@ -398,9 +451,63 @@ function dataLoad() {
       }
     }
   }
-
 }
 
+function setAnalysisSelectBox(regionNo, select_id) {
+  let op = document.createElement("option");
+  op.value = regionNo;  //value値
+  op.text = regionNo;   //テキスト値
+  document.getElementById(select_id).appendChild(op);
+}
+function clearAnalysisSelectBox(select_id) {
+  var sl = document.getElementById(select_id);
+  while (sl.lastChild) {
+    sl.removeChild(sl.lastChild);
+  }
+}
+function clearAnalysisTable(table_id) {
+  var tb = document.getElementById(table_id);
+  var length = tb.rows.length
+  for (var i = 0; i < length - 1; i++) {
+    tb.deleteRow(-1);
+  }
+}
+function getCELL() {
+  var myTbl = document.getElementById('sample1');
+  // trをループ。rowsコレクションで,行位置取得。
+  for (var i = 0; i < myTbl.rows.length; i++) {
+    // tr内のtdをループ。cellsコレクションで行内セル位置取得。
+    for (var j = 0; j < myTbl.rows[i].cells.length; j++) {
+      var Cells = myTbl.rows[i].cells[j]; //i番行のj番列のセル "td"
+      // onclickで 'Mclk'を実行。thisはクリックしたセル"td"のオブジェクトを返す。
+      Cells.onclick = function () { Mclk(this); }
+    }
+  }
+}
+function Mclk(Cell) {
+  var rowINX = '行位置：' + Cell.parentNode.rowIndex;//Cellの親ノード'tr'の行位置
+  var cellINX = 'セル位置：' + Cell.cellIndex;
+  var cellVal = 'セルの内容：' + Cell.innerHTML;
+  console.log('row:' + rowINX + ' column' + cellINX + ' content:' + cellVal);
+  areaObjectPos.row = Cell.parentNode.rowIndex;
+  areaObjectPos.column = Cell.cellIndex;
+  console.log(areaObjectPos);
+
+  if (areaObjectPos.row > 0 && areaObjectPos.column > 3) {
+    areaObject = dataObject.areaObject[areaObjectPos.row - 1];
+
+    if (canvas_map_top == null) {
+      canvas_map_top = new fabric.Canvas('cvn_top_map_id', {
+        isDrawingMode: true,
+        backgroundColor: 'rgba(255,255,255,0)',
+      });
+    }
+    canvas_map_top.setBackgroundImage(areaObject.src, canvas_map_top.renderAll.bind(canvas_map_top), {
+      backgroundImageOpacity: 0.5,
+      backgroundImageStretch: false
+    });
+  }
+};
 
 function removeSplitLastData(src) {
   var value = src.split('/');
@@ -418,6 +525,10 @@ function initialize() {
   document.getElementById("drawmode_button_id").disabled = "";
   setRegionData(lCameraNo, "");
   setPointsData(lMapPoints, lMapRegionNo);
+  clearAnalysisSelectBox("from_area_select_id");
+  clearAnalysisSelectBox("to_area_select_id");
+  clearAnalysisTable("sample2");
+
 }
 function initFileName() {
   lMapFileName = "";
@@ -477,6 +588,7 @@ function drawPolygon(canvas, targetPoints, regionNo, color) {
       y: targetPoints.points[i].circle.top + targetPoints.points[i].circle.radius
     };
     data.push(points);
+    areaObject.region.push(points);
     normData.push(normPoints);
   }
   var left = getleft(data);

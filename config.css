@@ -2,58 +2,76 @@ body {
     display: grid;
     margin: 0;
     resize: both;
-    min-height: 100vh;
-    grid-template-rows: 1fr 80px 540px 1fr;
-    grid-template-columns: 1fr;
+    grid-template-rows: 300px  500px 130px;
+    grid-template-columns: 630px 1fr;
     grid-template-areas:
-        "area_edit     "
-        "area_cntrl     "
-        "area_map       "
-        "area_setting"
+        "area_edit     area_setting"
+        "area_map      area_setting"
+        "area_map      area_set"
 }
 
-area_cntrl {
-    grid-area: area_cntrl;
-}
-
-area_map {
-    grid-area: area_map;
-}
 area_edit {
-    grid-area: area_edit;
-    scroll-behavior: auto,
+  grid-area: area_edit;
+  overflow-y:scroll;
+  background-color: rgb(180, 180, 180);
+  border:3px solid  rgb(222, 222, 222); 
 }
+area_map {
+  grid-area: area_map;
+}
+
 area_setting {
-    grid-area: area_setting;
+  grid-area: area_setting;
+  overflow-y:scroll;
+  background-color: rgb(180, 180, 180);
+  border:3px solid  rgb(222, 222, 222); 
+}
+area_set{
+  grid-area: area_set;
 }
 
+.button_set_id{
 
-#sample tr,
-#sample th,
-#sample td {
+}
+
+#sample1 tr,
+#sample1 th,
+#sample1 td {
     background-color: rgb(240, 240, 240);
-    font-size: inherit !important;
-    color: inherit !important;
 }
-#sample thead,
-#sample tfoot {
-    background-color: rgb(221, 221, 221);
+#sample1 thead,
+#sample1 tfoot {
+    background-color: rgb(180, 180, 180);
 }
-#sample {
-    border:1px solid black; 
+#sample1 {
+    border:3px solid  rgb(180, 180, 180); 
 }
-#sample thead {
-    border-bottom: double;
+#sample1 thead {
 }
-#sample tfoot {
-    border-top: double;
+#sample1 tfoot {
+}
+
+#sample2 tr,
+#sample2 th,
+#sample2 td {
+    background-color: rgb(240, 240, 240);
+}
+#sample2 thead,
+#sample2 tfoot {
+    background-color: rgb(180, 180, 180);
+}
+#sample2 {
+    border:1px solid  rgb(180, 180, 180); 
+}
+#sample2 thead {
+}
+#sample2 tfoot {
 }
 
 div#div_map_img_id{
     position: relative;
     width:1fr;  
     height:1fr; 
-    margin-top: 50px
 }
 div#div_map_img_id>*{
     position: absolute;
@@ -66,29 +84,29 @@ canvas#cvn_top_map_id{
 }
 
 #init_button_id {
-    box-shadow: 1px 1px 2px;
+
 }
 #drawmode_button_id {
-    box-shadow: 1px 1px 2px;
+
 }
 #set_polygon_button_id {
-    box-shadow: 1px 1px 2px;
+
 }
 
 #json_button_id {
-    box-shadow: 1px 1px 2px;    
+   
 }
 #clear_button_id {
-    box-shadow: 1px 1px 2px;    
+ 
 }
 #clear_all_button_id {
-    box-shadow: 1px 1px 2px;    
+    
 }
 #restore_button_id {
-    box-shadow: 1px 1px 2px;     
+    
 }
 #open_button_id {
-    box-shadow: 1px 1px 2px;
+
 }
 div#txt_log_id{
     font-size: 10px; 
@@ -96,4 +114,13 @@ div#txt_log_id{
     height:1fr; 
     border:1px solid black; 
     overflow:auto 
+}
+.area1{
+  margin: 5px; 
+}
+.area2{
+  margin: 5px;  
+}
+.area3{
+  margin: 5px
 }
