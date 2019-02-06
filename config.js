@@ -6,13 +6,22 @@ var areaObject = {
   fileName: "", //ファイルの名称
   src: "", //サーバー上ファイルのurl
   clop: 0, //0,1,2,3を指定
-  region: [], //設定したregionを格納
+  mapWidth: 0,
+  mapHeight: 0,
+  region: [
+    {
+      name: "", /* "region1", "region2", ・・・*/
+      index: 0,
+      enable: true,
+      mapPoints: [], //only axis data from mapPoints
+    },
+  ], //設定したregionを格納
   AnalysisObject: [], //解析タイプ、From,To
 };
 
 var dataObject = {
   name: "", //data名称を任意に決める。
-  index_num: 5,　//areaのindex数
+  index_num: 3,　//areaのindex数
   areaObject: [
     {
       name: "ららぽーと",
@@ -20,8 +29,96 @@ var dataObject = {
       fileName: "camera01_01.jpg", //ファイルの名称
       src: "./images/camera01_01.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
+      mapWidth: 576,
+      mapHeight: 432,
+      region: [
+        {
+          name: "input region 0",
+          index: 0,
+          enable: true,
+          mapPoints: [
+            {
+              "x": 248,
+              "y": 205
+            },
+            {
+              "x": 352,
+              "y": 188
+            },
+            {
+              "x": 444,
+              "y": 325
+            },
+            {
+              "x": 309,
+              "y": 363
+            }
+          ]
+        },
+        {
+          name: "input region 1",
+          index: 1,
+          enable: true,
+          mapPoints: [
+            {
+              "x": 80,
+              "y": 157
+            },
+            {
+              "x": 263,
+              "y": 212
+            },
+            {
+              "x": 315,
+              "y": 349
+            },
+            {
+              "x": 47,
+              "y": 340
+            }
+          ]
+        },
+        {
+          name: "input region 2",
+          index: 2,
+          enable: true,
+          mapPoints: [
+            {
+              "x": 153,
+              "y": 55
+            },
+            {
+              "x": 277,
+              "y": 116
+            },
+            {
+              "x": 236,
+              "y": 184
+            },
+            {
+              "x": 83,
+              "y": 176
+            }
+          ]
+        }
+      ],
+      AnalysisObject: [
+        {
+          analysisType: "flow",
+          fromArea: "1",
+          toArea: "0"
+        },
+        {
+          analysisType: "flow",
+          fromArea: "1",
+          toArea: "0"
+        },
+        {
+          analysisType: "flow",
+          fromArea: "2",
+          toArea: "0"
+        }
+      ]
     },
     {
       name: "ららぽーと",
@@ -29,7 +126,16 @@ var dataObject = {
       fileName: "camera01_02.jpg", //ファイルの名称
       src: "./images/camera01_02.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
-      region: [],
+      mapWidth: 0,
+      mapHeight: 0,
+      region: [
+        {
+          name: "", /* "region1", "region2", ・・・*/
+          index: 0,
+          enable: true,
+          mapPoints: [], //only axis data from mapPoints
+        },
+      ], //設定したregionを格納
       AnalysisObject: [], //解析タイプ、From,To
     },
     {
@@ -38,88 +144,16 @@ var dataObject = {
       fileName: "camera01_03.jpg", //ファイルの名称
       src: "./images/camera01_03.jpg", //サーバー上ファイルのurl
       clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_01.jpg", //ファイルの名称
-      src: "./images/camera02_01.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
-      AnalysisObject: [], //解析タイプ、From,To
-    },
-    {
-      name: "ららぽーと",
-      cameraName: "camera02",
-      fileName: "camera02_02.jpg", //ファイルの名称
-      src: "./images/camera02_02.jpg", //サーバー上ファイルのurl
-      clop: 0, //0,1,2,3を指定
-      region: [],
+      mapWidth: 0,
+      mapHeight: 0,
+      region: [
+        {
+          name: "", /* "region1", "region2", ・・・*/
+          index: 0,
+          enable: true,
+          mapPoints: [], //only axis data from mapPoints
+        },
+      ], //設定したregionを格納
       AnalysisObject: [], //解析タイプ、From,To
     },
   ]
@@ -369,17 +403,32 @@ window.onload = function () {
   };
   document.getElementById("set_button_id").onclick = function (e) {
     setTypeFromTo();
+    saveJsonData("temp.json", dataObject);
   };
   document.getElementById("tbody_id").onclick = function (e) {
-    // set polygon data for n region.
     getCELL();
   }
 }
 
+function initTypeFromTo(data) {
+  clearAnalysisTable("sample2");
+  for (var i = 0; i < data.AnalysisObject.length; i++) {
+    const analysisType = data.AnalysisObject[i].analysisType;
+    const fromArea = data.AnalysisObject[i].fromArea;
+    const toArea = data.AnalysisObject[i].toArea;
+    setAnalysisSelectBox(i, "from_area_select_id");
+    setAnalysisSelectBox(i, "to_area_select_id");
+    var elemet = document.getElementById("tbody_setting_id");
+    elemet.insertAdjacentHTML(
+      'beforeend',
+      '<tr><td><a>' + analysisType + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td></tr>'
+    );
+  }
+}
 
 function createTypeFromTo() {
   const type1 = document.form1.analysis_select_name;
-  const Analysis = type1.options[type1.selectedIndex].value;
+  const analysisType = type1.options[type1.selectedIndex].value;
 
   const type2 = document.form1.from_area_select_name;
   const fromArea = type2.options[type2.selectedIndex].value;
@@ -388,12 +437,12 @@ function createTypeFromTo() {
   const toArea = type3.options[type3.selectedIndex].value;
   var elemet = document.getElementById("tbody_setting_id");
 
-  var analysisType = { Analysis, fromArea, toArea };
+  var analysisType = { analysisType, fromArea, toArea };
   areaObject.AnalysisObject.push(analysisType);
 
   elemet.insertAdjacentHTML(
     'beforeend',
-    '<tr><td><a>' + Analysis + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td></tr>'
+    '<tr><td><a>' + analysisType + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td></tr>'
   );
 }
 
@@ -416,9 +465,11 @@ function dataLoad() {
     var camera_name = dataObject.areaObject[i].cameraName;
     var file_name = dataObject.areaObject[i].fileName;
     var clop = dataObject.areaObject[i].clop;
+    var width = dataObject.areaObject[i].mapWidth;
+    var height = dataObject.areaObject[i].mapHeight;
     test2.insertAdjacentHTML(
       'beforeend',
-      '<tr><td><a>' + area_name + '</a></td> <td><a>' + camera_name + '</a></td><td><a>' + file_name + '</a></td><td><a>' + clop + '</a></td><td><input type="button" id="select_button_id" class="button" value="select"></td></tr>'
+      '<tr><td><a>' + area_name + '</a></td> <td><a>' + camera_name + '</a></td><td><a>' + file_name + '</a></td><td><a>' + clop + '</a></td><td><a>' + width + '</a></td><td><a>' + height + '</a></td><td><input type="button" id="select_button_id" class="button" value="select"></td></tr>'
     );
   }
 
@@ -506,8 +557,39 @@ function Mclk(Cell) {
       backgroundImageOpacity: 0.5,
       backgroundImageStretch: false
     });
+
+    setImgSize(areaObject.src);
+    setPolygonDataFromAreaObject(areaObject);
+    initTypeFromTo(areaObject);
   }
 };
+
+function setPolygonDataFromAreaObject(data) {
+  if (canvas_map_top == null) {
+    return;
+  }
+  setRegionData(0, data.name);
+  document.getElementById("camera_name_text_id").value = data.cameraName;
+  for (var i = 0; i < data.region.length; i++) {
+    lMapPoints.name = data.region[i].name;
+    for (var k = 0; k < data.region[i].mapPoints.length; k++) {
+      if (data.region[i].enable) {
+        drawPoint(canvas_map_top, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'blue');
+      } else {
+        drawPoint(canvas_map_top, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'red');
+      }
+    }
+    if (data.region[i].enable) {
+      drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'blue');
+    } else {
+      drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'red');
+    }
+    lMapRegionNo++;
+    clearPoints(lMapPoints, lMapRegionNo);
+  }
+  finishRegionData();
+}
+
 
 function removeSplitLastData(src) {
   var value = src.split('/');
@@ -521,6 +603,7 @@ function removeSplitLastData(src) {
 function initialize() {
   lMapRegionNo = 0;
   lOutputData.region.length = 0;
+  areaObject.region.length = 0;
   lMapPoints.points.length = 0;
   document.getElementById("drawmode_button_id").disabled = "";
   setRegionData(lCameraNo, "");
@@ -528,7 +611,7 @@ function initialize() {
   clearAnalysisSelectBox("from_area_select_id");
   clearAnalysisSelectBox("to_area_select_id");
   clearAnalysisTable("sample2");
-
+  canvas_map_top = null;
 }
 function initFileName() {
   lMapFileName = "";
@@ -539,13 +622,16 @@ function initCanvas() {
   }
 }
 
-function setImgSize(canvas, img) {
-  if (canvas.id == "cvn_bg_map_id") {
+function setImgSize(src) {
+  var img = new Image();
+
+  img.onload = function () {
     lBgImgSize.map.width = img.width;
     lBgImgSize.map.height = img.height;
     lBgImgSize.map.naturalWidth = img.naturalWidth;
     lBgImgSize.map.naturalHeight = img.naturalHeight;
   }
+  img.src = src;
 }
 
 function setPointsData(targetPoints, regionNo) {
@@ -588,7 +674,7 @@ function drawPolygon(canvas, targetPoints, regionNo, color) {
       y: targetPoints.points[i].circle.top + targetPoints.points[i].circle.radius
     };
     data.push(points);
-    areaObject.region.push(points);
+
     normData.push(normPoints);
   }
   var left = getleft(data);
@@ -714,6 +800,7 @@ function tranceCamDataToOutputData(data) {
   lOutputData.mapFileName = lMapFileName;
   lOutputData.mapWidth = lBgImgSize.map.naturalWidth;
   lOutputData.mapHeight = lBgImgSize.map.naturalHeight;
+  areaObject.region.length = 0;
   for (var i = 0; i < data.region.length; i++) {
     var region = {
       name: "",
@@ -721,9 +808,11 @@ function tranceCamDataToOutputData(data) {
       enable: false,
       mapPoints: [],
     };
+    //セーブデータ
     region.name = data.region[i].name;
     region.index = data.region[i].index;
     region.enable = data.region[i].enable;
+
     //region.mapNormPoints.length = 0;
     //region.camNormPoints.length = 0;
     for (k = 0; k < data.region[i].mapPolygon.points.length; k++) {
@@ -732,10 +821,12 @@ function tranceCamDataToOutputData(data) {
         y: data.region[i].mapPolygon.points[k].y / lBgImgSize.map.height //normalize
       };
       region.mapPoints.push(data.region[i].mapPolygon.points[k]);
+
       //region.mapNormPoints.push(norm_point);
     }
 
     lOutputData.region.push(region);
+    areaObject.region.push(region);
   }
   lOutputData.name = data.name;
 }

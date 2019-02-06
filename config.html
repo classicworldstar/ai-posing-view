@@ -17,6 +17,7 @@
 </head>
 
 <body>
+  <area_header>header</area_header>
   <area_edit>
     <div class="area1">
       <table id="sample1">
@@ -26,6 +27,8 @@
             <th>カメラ名</th>
             <th>ファイル名</th>
             <th>クロップ</th>
+            <th>横幅</th>
+            <th>縦幅</th>
             <th>edit</th>
           </tr>
         </thead>
@@ -74,7 +77,6 @@
         <select id="to_area_select_id" name="to_area_select_name">
         </select>
         <input type="button" id="analysis_create_button_id" class="button" value="create">
-        <input type="button" id="analysis_set_button_id" class="button" value="set">
       </form>
       <table id="sample2">
         <thead>
@@ -90,7 +92,9 @@
     </div>
   </area_setting>
   <area_set>
-    <input type="button" id="set_button_id" class="set_button_id" value="set config">
+    <div class="set_button_wrapper">
+      <input type="button" id="set_button_id" class="set_button_id" value="set config">
+    </div>
   </area_set>
   <!--
     <area_debug>
