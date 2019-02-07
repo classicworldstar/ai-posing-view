@@ -40,7 +40,9 @@
 
   <area_map>
     <div class="area2">
+      <!--
       <input type="button" id="init_button_id" class="button" value="init"><br>
+      -->
       <input type="text" id="camera_name_text_id" name="example1" size="30" maxlength="30" value="input camera name"><br>
       <input type="text" id="region_name_text_id" name="example2" size="30" maxlength="30" value="input region name">
       <input type="button" id="set_polygon_button_id" class="button" value="set region"><br>
@@ -76,14 +78,21 @@
         <a>to:</a>
         <select id="to_area_select_id" name="to_area_select_name">
         </select>
+        <input type="text" id="shop_name_text_id" name="shop_name" size="20" maxlength="30" value="input shop name">
+        <select id="direction_select_id" name="direction_select_name">
+          <option value="exit">exit</option>
+          <option value="passby">passby</option>
+        </select>
         <input type="button" id="analysis_create_button_id" class="button" value="create">
       </form>
       <table id="sample2">
         <thead>
           <tr>
-            <th>解析タイプ</th>
+            <th>analysis</th>
             <th>--From--</th>
             <th>---To---</th>
+            <th>shop</th>
+            <th>direction</th>
           </tr>
         </thead>
         <tbody id="tbody_setting_id">

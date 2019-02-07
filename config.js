@@ -1,3 +1,5 @@
+//import { getleft, getright, gettop, getbottom, getcenter, isHit, removeSplitLastData } from "./libs/common"
+
 var areaObjectPos = { row: 0, column: 0 };
 
 var areaObject = {
@@ -105,18 +107,24 @@ var dataObject = {
       AnalysisObject: [
         {
           analysisType: "flow",
-          fromArea: "1",
-          toArea: "0"
+          fromArea: "2",
+          toArea: "1",
+          shopName: "shop1",
+          direction: "passby",
         },
         {
           analysisType: "flow",
           fromArea: "1",
-          toArea: "0"
+          toArea: "0",
+          shopName: "shop1",
+          direction: "passby",
         },
         {
           analysisType: "flow",
           fromArea: "2",
-          toArea: "0"
+          toArea: "0",
+          shopName: "shop1",
+          direction: "passby",
         }
       ]
     },
@@ -130,13 +138,69 @@ var dataObject = {
       mapHeight: 0,
       region: [
         {
-          name: "", /* "region1", "region2", ・・・*/
+          name: "input region 0",
           index: 0,
           enable: true,
-          mapPoints: [], //only axis data from mapPoints
+          mapPoints: [
+            {
+              "x": 5,
+              "y": 5
+            },
+            {
+              "x": 80,
+              "y": 30
+            },
+            {
+              "x": 90,
+              "y": 60
+            },
+            {
+              "x": 10,
+              "y": 70
+            }
+          ]
+        },
+        {
+          name: "input region 1",
+          index: 1,
+          enable: true,
+          mapPoints: [
+            {
+              "x": 60,
+              "y": 80
+            },
+            {
+              "x": 70,
+              "y": 100
+            },
+            {
+              "x": 65,
+              "y": 105
+            },
+            {
+              "x": 40,
+              "y": 80
+            }
+          ]
         },
       ], //設定したregionを格納
-      AnalysisObject: [], //解析タイプ、From,To
+      AnalysisObject:
+        [
+          {
+            analysisType: "flow",
+            fromArea: "1",
+            toArea: "0",
+            shopName: "shop2",
+            direction: "passby",
+          },
+          {
+            analysisType: "flow",
+            fromArea: "1",
+            toArea: "0",
+            shopName: "shop2",
+            direction: "passby",
+          },
+        ], //解析タイプ、From,To
     },
     {
       name: "ららぽーと",
@@ -154,7 +218,9 @@ var dataObject = {
           mapPoints: [], //only axis data from mapPoints
         },
       ], //設定したregionを格納
-      AnalysisObject: [], //解析タイプ、From,To
+      AnalysisObject: [
+
+      ], //解析タイプ、From,To
     },
   ]
 };
@@ -220,7 +286,7 @@ var lBgImgSize = { //information of background image at map area and camera area
   },
 };
 window.onload = function () {
-  dataLoad();
+  dataObjectLoad();
 
   initialize();
   initFileName();
@@ -266,10 +332,10 @@ window.onload = function () {
     form.myfile.value = ""; //json file name, select button            
 
   };
-  document.getElementById("init_button_id").onclick = function (e) {
-    window.location.reload(true);
-    form.myfile.value = ""; //json file name, select button
-  };
+  //  document.getElementById("init_button_id").onclick = function (e) {
+  //    window.location.reload(true);
+  //    form.myfile.value = ""; //json file name, select button
+  //  };
 
   document.getElementById("camera_name_text_id").onclick = function (e) {
     document.getElementById("camera_name_text_id").value = "";
@@ -295,18 +361,18 @@ window.onload = function () {
     // set polygon data for n region.
 
     if (lMapPoints.points.length > 1) {
+      var CurrentRegionNo = lMapRegionNo;
       // Map and Camera, number of circle point is same.
       lCameraData.name = document.getElementById("camera_name_text_id").value;
       lMapPoints.name = document.getElementById("region_name_text_id").value;
-      lMapPoints.index = lMapRegionNo;
-      drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'blue');
-
+      lMapPoints.index = CurrentRegionNo;
+      var polygon = drawPolygon(canvas_map_top, lMapPoints, CurrentRegionNo, 'blue');
+      addRegionData(canvas_map_top, polygon, lMapPoints, CurrentRegionNo)
       //解析タイプのselectboxに追加
-      setAnalysisSelectBox(lMapRegionNo, "from_area_select_id");
-      setAnalysisSelectBox(lMapRegionNo, "to_area_select_id");
-      lMapRegionNo++;
+      setAnalysisSelectBox(CurrentRegionNo, "from_area_select_id");
+      setAnalysisSelectBox(CurrentRegionNo, "to_area_select_id");
 
-      clearPoints(lMapPoints, lMapRegionNo);
+      clearPoints(lMapPoints, CurrentRegionNo);
     } else {
       alert("the number of points > 1");
     }
@@ -360,26 +426,7 @@ window.onload = function () {
     reader.addEventListener('load', function () {
       console.log(reader.result);
       var data = JSON.parse(reader.result);
-      setRegionData(0, data.name);
-      document.getElementById("camera_name_text_id").value = data.name;
-      for (var i = 0; i < data.region.length; i++) {
-        lMapPoints.name = data.region[i].name;
-        for (var k = 0; k < data.region[i].mapPoints.length; k++) {
-          if (data.region[i].enable) {
-            drawPoint(canvas_map_top, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'blue');
-          } else {
-            drawPoint(canvas_map_top, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'red');
-          }
-        }
-        if (data.region[i].enable) {
-          drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'blue');
-        } else {
-          drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'red');
-        }
-        lMapRegionNo++;
-        clearPoints(lMapPoints, lMapRegionNo);
-      }
-      finishRegionData();
+      createRegionData(canvas_map_top, data.name, data);
     });
   });
 
@@ -397,7 +444,9 @@ window.onload = function () {
   document.getElementById("div_map_img_id").addEventListener("mouseup", function (e) {
     console.log("img_map_img_id,mouseup");
   });
-
+  document.getElementById("shop_name_text_id").onclick = function (e) {
+    document.getElementById("shop_name_text_id").value = "";
+  };
   document.getElementById("analysis_create_button_id").onclick = function (e) {
     createTypeFromTo();
   };
@@ -405,23 +454,25 @@ window.onload = function () {
     setTypeFromTo();
     saveJsonData("temp.json", dataObject);
   };
-  document.getElementById("tbody_id").onclick = function (e) {
-    getCELL();
-  }
 }
 
 function initTypeFromTo(data) {
-  clearAnalysisTable("sample2");
+  clearAnalysisSelectBox("from_area_select_id");
+  clearAnalysisSelectBox("to_area_select_id");
+  clearTable("sample2");
   for (var i = 0; i < data.AnalysisObject.length; i++) {
     const analysisType = data.AnalysisObject[i].analysisType;
     const fromArea = data.AnalysisObject[i].fromArea;
     const toArea = data.AnalysisObject[i].toArea;
+    const shopName = data.AnalysisObject[i].shopName;
+    const direction = data.AnalysisObject[i].direction;
+
     setAnalysisSelectBox(i, "from_area_select_id");
     setAnalysisSelectBox(i, "to_area_select_id");
     var elemet = document.getElementById("tbody_setting_id");
     elemet.insertAdjacentHTML(
       'beforeend',
-      '<tr><td><a>' + analysisType + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td></tr>'
+      '<tr><td><a>' + analysisType + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td><td><a>' + shopName + '</a></td><td><a>' + direction + '</a></td></tr>'
     );
   }
 }
@@ -435,14 +486,20 @@ function createTypeFromTo() {
 
   const type3 = document.form1.to_area_select_name;
   const toArea = type3.options[type3.selectedIndex].value;
+
+  const shopName = document.getElementById("shop_name_text_id").value;
+
+  const type4 = document.form1.direction_select_name;
+  const direction = type4.options[type4.selectedIndex].value;
+
   var elemet = document.getElementById("tbody_setting_id");
 
-  var analysisType = { analysisType, fromArea, toArea };
-  areaObject.AnalysisObject.push(analysisType);
+  var analysisTypeObject = { analysisType, fromArea, toArea, shopName, direction };
+  areaObject.AnalysisObject.push(analysisTypeObject);
 
   elemet.insertAdjacentHTML(
     'beforeend',
-    '<tr><td><a>' + analysisType + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td></tr>'
+    '<tr><td><a>' + analysisType + '</a></td> <td><a>' + fromArea + '</a></td><td><a>' + toArea + '</a></td><td><a>' + shopName + '</a></td><td><a>' + direction + '</a></td></tr>'
   );
 }
 
@@ -457,7 +514,8 @@ function setTypeFromTo() {
 
 }
 
-function dataLoad() {
+function dataObjectLoad() {
+  clearTable("sample1");
   //serverからデータを受信して、表示を行う。
   var test2 = document.getElementById("tbody_id");
   for (var i = 0; i < dataObject.areaObject.length; i++) {
@@ -472,36 +530,7 @@ function dataLoad() {
       '<tr><td><a>' + area_name + '</a></td> <td><a>' + camera_name + '</a></td><td><a>' + file_name + '</a></td><td><a>' + clop + '</a></td><td><a>' + width + '</a></td><td><a>' + height + '</a></td><td><input type="button" id="select_button_id" class="button" value="select"></td></tr>'
     );
   }
-
-  var $sampleTable = document.getElementById("sample1");
-  var $sampleTBodies = $sampleTable.tBodies;
-
-  for (var $tbodyIndex = 0; $tbodyIndex < $sampleTBodies.length; $tbodyIndex++) {
-    var $sampleTBodyRows = $sampleTBodies[$tbodyIndex].rows;
-    for (var $rowIndex = 0; $rowIndex < $sampleTBodyRows.length; $rowIndex++) {
-      $sampleTBodyRows[$rowIndex].onmouseover = function () {
-        this.style.backgroundColor = "yellow";
-      };
-      $sampleTBodyRows[$rowIndex].onmouseout = function () {
-        this.style.backgroundColor = "";
-      };
-      $sampleTBodyRows[$rowIndex].onclick = function () {
-        this.style.backgroundColor = "blue";
-      };
-      var $sampleTBodyCells = $sampleTBodyRows[$rowIndex].cells;
-      for (var $cellIndex = 0; $cellIndex < $sampleTBodyCells.length; $cellIndex++) {
-        //$sampleTBodyCells[$cellIndex].onmouseover = function () {
-        //  this.style.backgroundColor = "red";
-        //};
-        $sampleTBodyCells[$cellIndex].onmouseout = function () {
-          this.style.backgroundColor = "";
-        };
-        $sampleTBodyCells[$cellIndex].onclick = function () {
-          this.style.backgroundColor = "green";
-        };
-      }
-    }
-  }
+  getCELL();
 }
 
 function setAnalysisSelectBox(regionNo, select_id) {
@@ -516,7 +545,7 @@ function clearAnalysisSelectBox(select_id) {
     sl.removeChild(sl.lastChild);
   }
 }
-function clearAnalysisTable(table_id) {
+function clearTable(table_id) {
   var tb = document.getElementById(table_id);
   var length = tb.rows.length
   for (var i = 0; i < length - 1; i++) {
@@ -544,9 +573,9 @@ function Mclk(Cell) {
   areaObjectPos.column = Cell.cellIndex;
   console.log(areaObjectPos);
 
-  if (areaObjectPos.row > 0 && areaObjectPos.column > 3) {
+  if (areaObjectPos.row > 0 && areaObjectPos.column > 5) {
     areaObject = dataObject.areaObject[areaObjectPos.row - 1];
-
+    initCanvas();
     if (canvas_map_top == null) {
       canvas_map_top = new fabric.Canvas('cvn_top_map_id', {
         isDrawingMode: true,
@@ -568,40 +597,38 @@ function setPolygonDataFromAreaObject(data) {
   if (canvas_map_top == null) {
     return;
   }
+  createRegionData(canvas_map_top, data.cameraName, data);
+}
+
+function createRegionData(canvas, cameraName, data) {
   setRegionData(0, data.name);
-  document.getElementById("camera_name_text_id").value = data.cameraName;
+  document.getElementById("camera_name_text_id").value = cameraName;
   for (var i = 0; i < data.region.length; i++) {
     lMapPoints.name = data.region[i].name;
     for (var k = 0; k < data.region[i].mapPoints.length; k++) {
       if (data.region[i].enable) {
-        drawPoint(canvas_map_top, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'blue');
+        drawPoint(canvas, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'blue');
       } else {
-        drawPoint(canvas_map_top, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'red');
+        drawPoint(canvas, lMapPoints, data.region[i].mapPoints[k].x, data.region[i].mapPoints[k].y, 'red');
       }
     }
+    var polygon;
     if (data.region[i].enable) {
-      drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'blue');
+      polygon = drawPolygon(canvas, lMapPoints, i, 'blue');
     } else {
-      drawPolygon(canvas_map_top, lMapPoints, lMapRegionNo, 'red');
+      polygon = drawPolygon(canvas, lMapPoints, i, 'red');
     }
-    lMapRegionNo++;
-    clearPoints(lMapPoints, lMapRegionNo);
+    if (polygon != null) {
+      addRegionData(canvas, polygon, lMapPoints, i);
+    }
+    clearPoints(lMapPoints, i);
   }
   finishRegionData();
 }
 
 
-function removeSplitLastData(src) {
-  var value = src.split('/');
-  var result = "";
-  for (var i = 0; i < value.length - 1; i++) {
-    result = result + value[i] + "/";
-  }
-  return result;
-}
 
 function initialize() {
-  lMapRegionNo = 0;
   lOutputData.region.length = 0;
   areaObject.region.length = 0;
   lMapPoints.points.length = 0;
@@ -610,7 +637,7 @@ function initialize() {
   setPointsData(lMapPoints, lMapRegionNo);
   clearAnalysisSelectBox("from_area_select_id");
   clearAnalysisSelectBox("to_area_select_id");
-  clearAnalysisTable("sample2");
+  clearTable("sample2");
   canvas_map_top = null;
 }
 function initFileName() {
@@ -687,8 +714,11 @@ function drawPolygon(canvas, targetPoints, regionNo, color) {
     center = getcenter(data);
     text = addText(String(regionNo), canvas, center.x, center.y, 20, 'red');
     targetPoints.points.text = text;
+    return polygon;
+  } else {
+    return null;
   }
-  addRegionData(canvas, polygon, targetPoints, regionNo);
+  //addRegionData(canvas, polygon, targetPoints, regionNo);
 }
 function addPolygon(canvas, data, left, top) {
   var polygon = new fabric.Polygon(data, {
@@ -714,6 +744,7 @@ function setRegionData(camNo, camName) {
   lCameraData.focusRegionNo = 0;
   lCameraData.finish = false;
   lCameraData.region.length = 0;
+  lMapRegionNo = 0;
 }
 function addRegionData(canvas, polygon, data, regionNo) {
   if (lCameraData.region.length <= regionNo) {
@@ -731,6 +762,7 @@ function addRegionData(canvas, polygon, data, regionNo) {
     for (var i = 0; i < data.points.length; i++) {
       lCameraData.region[regionNo].mapPoints.push(data.points[i]);
     }
+    lMapRegionNo++;
   }
 }
 function finishRegionData(camNo) {
@@ -781,10 +813,20 @@ function saveCameraData(fileName) {
   saveJsonData(fileName, lCameraData);
 }
 function saveOutputData(fileName) {
+  if (areaObjectPos.row > 0) {
+    updateImgSizeToDataObject(areaObjectPos.row - 1); //dataObjectのimgSizeの情報を更新する。この場所で更新するのはわかりにくいので後日修正するべき★
+  }
   tranceCamDataToOutputData(lCameraData);
   saveJsonData(fileName, lOutputData);
   lOutputData.region.length = 0;
+  dataObjectLoad();
 }
+function updateImgSizeToDataObject(objectNo) {
+  dataObject.areaObject[objectNo].mapWidth = lBgImgSize.map.naturalWidth;
+  dataObject.areaObject[objectNo].mapHeight = lBgImgSize.map.naturalHeight;
+
+}
+
 function saveJsonData(fileName, data) {
   const blob = new Blob([JSON.stringify(data, null, '  ')],
     { type: 'application\/json' });
@@ -829,6 +871,63 @@ function tranceCamDataToOutputData(data) {
     areaObject.region.push(region);
   }
   lOutputData.name = data.name;
+}
+
+function selectRegion(camenra_no, canvas, targetPoints, x, y) {
+  retParam = hitRegion(camenra_no, canvas, x, y);
+  if (retParam.enable) {
+    console.log("hitRegion");
+
+    for (var i = 0; i < retParam.points.length; i++) {
+      var left = retParam.points[i].x;
+      var top = retParam.points[i].y;
+      var radius = 5;
+
+      //canvas.remove(targetPoints.points[i].circle);
+      var circle = null
+      if (lCameraData.region[retParam.regionNo].enable) {
+        circle = addCircle(canvas, left - radius, top - radius, radius, 'red');
+      } else {
+        circle = addCircle(canvas, left - radius, top - radius, radius, 'blue');
+      }
+      if (circle) {
+        //                canvas.remove(retParam.points[i].circle); circleを共通のパラメータにしないと余計なcircleを残すことになる。今は修正できていない。
+        //                targetPoints.points[i].circle = circle;        
+      }
+
+    }
+    if (lCameraData.region[retParam.regionNo].enable) {
+      lCameraData.region[retParam.regionNo].enable = false;
+    } else {
+      lCameraData.region[retParam.regionNo].enable = true;
+    }
+  }
+}
+
+function hitRegion(camenra_no, canvas, x, y) {
+  var retParam = {
+    regionNo: 0,
+    enable: false,
+    points: [],
+  };
+  var left = 0;
+  var right = 0;
+  var top = 0;
+  var bottom = 0;
+  if (canvas.lowerCanvasEl.id == "cvn_top_map_id") { //map
+    for (var i = 0; i < lCameraData.region.length; i++) {
+      left = getleft(lCameraData.region[i].mapPolygon.points);
+      right = getright(lCameraData.region[i].mapPolygon.points);
+      top = gettop(lCameraData.region[i].mapPolygon.points);
+      bottom = getbottom(lCameraData.region[i].mapPolygon.points);
+      if (isHit(left, right, top, bottom, x, y)) {
+        retParam.regionNo = i;
+        retParam.enable = true;
+        retParam.points = lCameraData.region[i].mapPolygon.points;
+      }
+    }
+  }
+  return retParam;
 }
 
 function getleft(data) {
@@ -901,68 +1000,6 @@ function getcenter(data) {
   return ret;
 }
 
-
-function selectRegion(camenra_no, canvas, targetPoints, x, y) {
-  retParam = hitRegion(camenra_no, canvas, x, y);
-  if (retParam.enable) {
-    console.log("hitRegion");
-
-    for (var i = 0; i < retParam.points.length; i++) {
-      /*
-      var left = retParam.points[i].circle.left;
-      var top = retParam.points[i].circle.top;
-      var radius = retParam.points[i].circle.radius;
-      */
-      var left = retParam.points[i].x;
-      var top = retParam.points[i].y;
-      var radius = 5;
-
-      //canvas.remove(targetPoints.points[i].circle);
-      var circle = null
-      if (lCameraData.region[retParam.regionNo].enable) {
-        circle = addCircle(canvas, left - radius, top - radius, radius, 'red');
-      } else {
-        circle = addCircle(canvas, left - radius, top - radius, radius, 'blue');
-      }
-      if (circle) {
-        //                canvas.remove(retParam.points[i].circle); circleを共通のパラメータにしないと余計なcircleを残すことになる。今は修正できていない。
-        //                targetPoints.points[i].circle = circle;        
-      }
-
-    }
-    if (lCameraData.region[retParam.regionNo].enable) {
-      lCameraData.region[retParam.regionNo].enable = false;
-    } else {
-      lCameraData.region[retParam.regionNo].enable = true;
-    }
-  }
-}
-
-function hitRegion(camenra_no, canvas, x, y) {
-  var retParam = {
-    regionNo: 0,
-    enable: false,
-    points: [],
-  };
-  var left = 0;
-  var right = 0;
-  var top = 0;
-  var bottom = 0;
-  if (canvas.lowerCanvasEl.id == "cvn_top_map_id") { //map
-    for (var i = 0; i < lCameraData.region.length; i++) {
-      left = getleft(lCameraData.region[i].mapPolygon.points);
-      right = getright(lCameraData.region[i].mapPolygon.points);
-      top = gettop(lCameraData.region[i].mapPolygon.points);
-      bottom = getbottom(lCameraData.region[i].mapPolygon.points);
-      if (isHit(left, right, top, bottom, x, y)) {
-        retParam.regionNo = i;
-        retParam.enable = true;
-        retParam.points = lCameraData.region[i].mapPolygon.points;
-      }
-    }
-  }
-  return retParam;
-}
 function isHit(pos_x1, pos_x2, pos_y1, pos_y2, x, y) {
   if (pos_x1 <= x && x <= pos_x2) {
     if (pos_y1 <= y && y <= pos_y2) {
@@ -974,4 +1011,13 @@ function isHit(pos_x1, pos_x2, pos_y1, pos_y2, x, y) {
   var log = "noHit:" + String(pos_x1) + "<=" + String(x) + "<" + String(pos_x2) + ", " + String(pos_y1) + "<=" + String(y) + "<" + String(pos_y2);
   console.log(log);
   return false;
+}
+
+function removeSplitLastData(src) {
+  var value = src.split('/');
+  var result = "";
+  for (var i = 0; i < value.length - 1; i++) {
+    result = result + value[i] + "/";
+  }
+  return result;
 }
