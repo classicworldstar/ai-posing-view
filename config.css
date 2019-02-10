@@ -3,7 +3,7 @@ body {
     margin:2;
     resize: both;
     grid-template-rows: 40px  500px 130px;
-    grid-template-columns: 1fr 630px 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
         "area_header  area_header  area_header"
         "area_edit  area_map  area_setting"

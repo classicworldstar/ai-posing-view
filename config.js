@@ -367,7 +367,7 @@ window.onload = function () {
       lMapPoints.name = document.getElementById("region_name_text_id").value;
       lMapPoints.index = CurrentRegionNo;
       var polygon = drawPolygon(canvas_map_top, lMapPoints, CurrentRegionNo, 'blue');
-      addRegionData(canvas_map_top, polygon, lMapPoints, CurrentRegionNo)
+      addRegionData(canvas_map_top, polygon, lMapPoints, CurrentRegionNo, true)
       //解析タイプのselectboxに追加
       setAnalysisSelectBox(CurrentRegionNo, "from_area_select_id");
       setAnalysisSelectBox(CurrentRegionNo, "to_area_select_id");
@@ -400,7 +400,7 @@ window.onload = function () {
       alert("set image data(jpg/png) on map and camera.");
       return;
     }
-    initialize();
+    //initialize();
     if (canvas_map_top == null) {
       canvas_map_top = new fabric.Canvas('cvn_top_map_id');
       canvas_map_top.isDrawingMode = true;
@@ -582,6 +582,7 @@ function Mclk(Cell) {
         backgroundColor: 'rgba(255,255,255,0)',
       });
     }
+    lMapFileName = areaObject.fileName;
     canvas_map_top.setBackgroundImage(areaObject.src, canvas_map_top.renderAll.bind(canvas_map_top), {
       backgroundImageOpacity: 0.5,
       backgroundImageStretch: false
@@ -619,7 +620,7 @@ function createRegionData(canvas, cameraName, data) {
       polygon = drawPolygon(canvas, lMapPoints, i, 'red');
     }
     if (polygon != null) {
-      addRegionData(canvas, polygon, lMapPoints, i);
+      addRegionData(canvas, polygon, lMapPoints, i, data.region[i].enable);
     }
     clearPoints(lMapPoints, i);
   }
@@ -718,7 +719,6 @@ function drawPolygon(canvas, targetPoints, regionNo, color) {
   } else {
     return null;
   }
-  //addRegionData(canvas, polygon, targetPoints, regionNo);
 }
 function addPolygon(canvas, data, left, top) {
   var polygon = new fabric.Polygon(data, {
@@ -746,12 +746,12 @@ function setRegionData(camNo, camName) {
   lCameraData.region.length = 0;
   lMapRegionNo = 0;
 }
-function addRegionData(canvas, polygon, data, regionNo) {
+function addRegionData(canvas, polygon, data, regionNo, enable) {
   if (lCameraData.region.length <= regionNo) {
     var region = {
       name: data.name,
       index: regionNo,
-      enable: true,
+      enable: enable,
       mapPolygon: null,
       mapPoints: [],
     };
