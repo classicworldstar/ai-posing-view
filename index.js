@@ -6,7 +6,7 @@ window.onresize = function () {
 }
 
 function resizeFrame(offsetX, offsetY) {
-  var tmp_height = document.documentElement.clientHeight - 110 - offsetY;
+  var tmp_height = document.documentElement.clientHeight - 80 - offsetY;
   var tmp_width = document.documentElement.clientWidth - 220 - offsetX;
   //フレームのエレメント取得
   var fm_elm = document.getElementById("ifrm");

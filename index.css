@@ -4,7 +4,7 @@ body {
     display: grid;
     margin: 3px;
     resize: both;
-    grid-template-rows: 70px 1fr;
+    grid-template-rows: 40px 1fr;
     grid-template-columns: 200px 1fr;
     box-shadow: 1px 1px 2px;
     grid-template-areas:
@@ -32,6 +32,13 @@ area_contents {
 
 .iframe_main{
     margin:auto;
+    color: #5d627b;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+.iframe_main p {
+    margin: 0; 
+    padding: 0;
 }
 
 .title{
@@ -39,6 +46,11 @@ area_contents {
     padding: 10px;
 }
 .div_area_menu_id{
+    margin-left: 10px;
+    padding: 3px;
+}
+.div_area_option_id{
+
     margin-left: 10px;
     padding: 3px;
 }
